@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./src/db/mysql_data:/var/lib/mysql
+      - ./src/db/mysql_conf/:/etc/mysql/conf.d
+      - ./src/db/mysql_init/:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=root
+      - MYSQL_DB_HOST=db
+      - MYSQL_DATABASE=app_db
+    ports:
+      - "3306:3306"
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./src:/app_name
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=root
+    links:
+      - db
+    tty: true
+    stdin_open: true
