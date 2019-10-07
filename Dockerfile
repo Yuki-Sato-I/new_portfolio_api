@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
 # Node.jsをインストール
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install nodejs
 RUN gem install bundler
 WORKDIR /tmp

@@ -1,0 +1,9 @@
+<h1><%= @greeting %></h1>
+<form class="mailForm" action="/sandbox/sandbox/send" method="post">
+    <div class="mailForm__group">
+        <label for="name">メールアドレス</label>
+        <input type="text" id="email" name="email" required/>
+    </div>
+    <input type="hidden" id="token" name="token" value="1234567" />
+    <button class="mailForm__submit" type="submit">送信</button>
+</form>
