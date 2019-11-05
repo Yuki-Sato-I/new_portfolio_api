@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'users/index'
+  get 'users/show'
+  get 'users/edit'
+  get 'works/index'
+  get 'works/show'
+  get 'works/edit'
+  get 'skills/index'
+  get 'skills/show'
+  get 'skills/edit'
 
-  get '/sandbox/sandbox', to: 'sandbox#index'
-  post '/sandbox/sandbox/send', to: 'sandbox#send'
 end
