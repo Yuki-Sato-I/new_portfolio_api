@@ -5,6 +5,8 @@ class CreateHistories < ActiveRecord::Migration[6.0]
       t.string :title
       t.text :content
       t.string :period
+      t.datetime :start_at
+      t.datetime :end_at
 
       t.timestamps
     end

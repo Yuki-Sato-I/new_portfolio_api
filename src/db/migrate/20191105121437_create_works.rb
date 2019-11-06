@@ -6,6 +6,7 @@ class CreateWorks < ActiveRecord::Migration[6.0]
       t.text :content
       t.string :url
       t.integer :status
+      t.datetime :release_at
 
       t.timestamps
     end
