@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   end
 
   def new
-
   end
 
   def create
@@ -11,6 +10,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @works = Work.all
+    @skills = Skill.all
+    @histories = History.all
   end
 
   def edit

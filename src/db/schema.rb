@@ -12,22 +12,24 @@
 
 ActiveRecord::Schema.define(version: 2019_11_05_121701) do
 
-  create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "image"
     t.string "title"
     t.text "content"
     t.string "period"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "image"
     t.string "name"
     t.integer "age"
@@ -37,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_121701) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "work_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "work_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "skill_id", null: false
     t.bigint "work_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -46,12 +48,13 @@ ActiveRecord::Schema.define(version: 2019_11_05_121701) do
     t.index ["work_id"], name: "index_work_skills_on_work_id"
   end
 
-  create_table "works", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "works", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "image"
     t.string "title"
     t.text "content"
     t.string "url"
     t.integer "status"
+    t.datetime "release_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

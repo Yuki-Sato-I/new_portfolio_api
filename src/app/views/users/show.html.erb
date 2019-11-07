@@ -1,2 +1,24 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <div class="profile-container">
+    <span><%= image_tag @user.image.to_s, size: '200x200' %></span>
+    <div class="profile inline-block">
+      <h1><%= @user.name %></h1>
+      <p><%= @user.age %>/<%= @user.profession %></p>
+    </div>
+  </div>
+  <div class="work-container none">
+    <% @works.each do |work| %>
+      <p><%= work.title %></p>
+    <% end %>
+  </div>
+  <div class="skill-container none">
+    <% @skills.each do |skill| %>
+      <p><%= skill.name %></p>
+    <% end %>
+  </div>
+  <div class="history-container none">
+    <% @histories.each do |history| %>
+      <p><%= history.title %></p>
+    <% end %>
+  </div>
+</div>

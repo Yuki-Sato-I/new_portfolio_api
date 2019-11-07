@@ -1,0 +1,35 @@
+.selection-bar {
+  line-height: 130px;
+  ul {
+    font-size: 0;
+    width: calc(100% - 100px);
+    margin: 0 auto;
+    li {
+      width: 25%;
+      height: 80px;
+      line-height: 80px;
+      background-color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #ff6a5c;
+      vertical-align: middle;
+      &:hover {
+        text-decoration: underline;
+        text-decoration-color:#ff6a5c;
+      }
+      span {
+        height: 50px;
+        width: 130px;
+        line-height: 50px;
+      }
+    }
+  }
+
+  .selected-tab span {
+    border: solid 3px #ff6a5c;
+    height: 50px;
+    width: 130px;
+    line-height: 50px;
+  }
+}
