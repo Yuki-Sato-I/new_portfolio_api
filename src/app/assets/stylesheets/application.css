@@ -14,13 +14,14 @@
  *= require_self
  */
 
- header {
-	 height: 100px;
- }
+header {
+	height: 100px;
+}
 
- body {
+body {
 	margin: 0;
 	background-color: white;
+	color: #464E58;
 }
 .flex{
   display: flex;

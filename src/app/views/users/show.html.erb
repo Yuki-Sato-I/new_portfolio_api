@@ -3,13 +3,31 @@
     <span><%= image_tag @user.image.to_s, size: '200x200' %></span>
     <div class="profile inline-block">
       <h1><%= @user.name %></h1>
-      <p><%= @user.age %>/<%= @user.profession %></p>
+      <p>年齢: <%= @user.age %>歳</p>
+      <p>職業: <%= @user.profession %></p>
+    </div>
+    <div class="user-content">
+      <p><%= @user.content %></p>
     </div>
   </div>
   <div class="work-container none">
-    <% @works.each do |work| %>
-      <p><%= work.title %></p>
-    <% end %>
+    <div class="work-scroll inline-block">
+      <ul>
+        <% @works.each do |work| %>
+          <li><%= work.title %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="work-content inline-block">
+      <span class="inline-block"><%= image_tag @user.image.to_s, size: '400x300' %></span>
+      <div class="work-right-content inline-block">
+        <h1>Title: 初めてのwii</h1>
+        <p>関連url: http://hogehogehoge.com</p>
+        <p>status: 公開(1)</p>
+        <p>公開日: 2019/10/19</p>
+      </div>
+      <p>3週間くらい前に初めてDockerに触れて、その時のメモを放置したままだったので、改めてまとめました。Dockerに初めて触れた時に練習としてやった超簡単な環境構築の話なので、私のように、Docker触ったことない・これから触ってみたいという人を対象とした記事になっています。また、Dockerへの理解はまだまだ浅いこともあるため、間違った部分があったり、非効率的な導入方法になっているかもしれない点はご了承ください！(アドバイス等あれば是非ご教示いただければ幸いです！)</p>
+    </div>
   </div>
   <div class="skill-container none">
     <% @skills.each do |skill| %>

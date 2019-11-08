@@ -15,6 +15,55 @@
   .profile {
     width: calc(100% - 350px);
     vertical-align: top;
+    height: 200px;
+    margin: 50px 0;
+  }
+
+  .user-content {
+    width: calc(100% - 100px);
+    margin: 0 auto;
+  }
+}
+
+.work-container {
+  border: solid 1px black;
+  height: 600px;
+
+  span {
+    width: 50%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .work-right-content {
+    width: 49%;
     height: 300px;
+    vertical-align: top;
+    margin-top: 10px;
+    p {
+      margin-bottom: 5px;
+    }
+  }
+
+  .work-scroll {
+    width: 250px;
+    height: 600px;
+    overflow: scroll;
+
+    ul li {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      height: 60px;
+      line-height: 60px;
+      border: solid 1px black;
+    }
+  }
+
+  .work-content {
+    height: 600px;
+    width: calc(100% - 260px);
+    vertical-align: top;
+    overflow: scroll;
   }
 }
