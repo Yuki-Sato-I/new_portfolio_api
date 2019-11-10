@@ -1,6 +1,6 @@
 <div class="container">
   <div class="profile-container">
-    <span><%= image_tag @user.image.to_s, size: '200x200' %></span>
+    <span><%= image_tag '', size: '200x200' %></span>
     <div class="profile inline-block">
       <h1><%= @user.name %></h1>
       <p>年齢: <%= @user.age %>歳</p>
@@ -13,22 +13,26 @@
   <div class="work-container none">
     <div class="work-scroll inline-block">
       <ul>
-        <% @works.each do |work| %>
-          <li><%= work.title %></li>
+        <% @works.each_with_index do |work, i| %>
+            <li value=<%= i+1 %> <% if i==0 %> class="selected-work" <% end %>><%= work.title %></li>
         <% end %>
       </ul>
     </div>
     <div class="work-content inline-block">
-      <span class="inline-block"><%= image_tag @user.image.to_s, size: '400x300' %></span>
+      <span class="inline-block"><%= image_tag '', size: '400x300', id: 'work-image' %></span>
       <div class="work-right-content inline-block">
-        <h1>Title: 初めてのwii</h1>
-        <p>関連url: http://hogehogehoge.com</p>
-        <p>status: 公開(1)</p>
-        <p>公開日: 2019/10/19</p>
-        <p>Skill</p>
-        <span>php </span><span>ruby </span><span>docker </span><span>rails </span>
+        <h1>Title: <%= @work.title %></h1>
+        <p>関連url: <%= @work.url %></p>
+        <p>status: <%= @work.status %></p>
+        <p>公開日: <%= @work.release_at.strftime("%Y/%m/%d") %></p>
+        <div>
+          <p>Skill</p>
+          <% @work.skills.each do |skill| %>
+            <span><%= skill.name %> </span>
+          <% end %>
+        </div>
       </div>
-      <p>3週間くらい前に初めてDockerに触れて、その時のメモを放置したままだったので、改めてまとめました。Dockerに初めて触れた時に練習としてやった超簡単な環境構築の話なので、私のように、Docker触ったことない・これから触ってみたいという人を対象とした記事になっています。また、Dockerへの理解はまだまだ浅いこともあるため、間違った部分があったり、非効率的な導入方法になっているかもしれない点はご了承ください！(アドバイス等あれば是非ご教示いただければ幸いです！)</p>
+      <p id="work-content"><%= @work.content %></p>
     </div>
   </div>
   <div class="skill-container none">

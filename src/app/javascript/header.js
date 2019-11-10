@@ -2,7 +2,6 @@ $(function(){
   $('.selection-bar li span').on('click', function(){
     $('.selection-bar li').removeClass('selected-tab');
     $(this).parent().addClass('selected-tab');
-    console.log('tanavklnkal');
   });
 
   $('.about').on('click', function(){

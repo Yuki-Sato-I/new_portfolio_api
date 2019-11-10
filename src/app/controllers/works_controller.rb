@@ -2,6 +2,10 @@ class WorksController < ApplicationController
   def index
   end
 
+  def get
+
+  end
+
   def new
 
   end
@@ -11,6 +15,8 @@ class WorksController < ApplicationController
   end
 
   def show
+    work = Work.find(params[:id])
+    render json: work, methods: :skills
   end
 
   def edit
