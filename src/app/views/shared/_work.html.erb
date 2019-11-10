@@ -1,0 +1,25 @@
+<div class="work-container none">
+  <div class="work-scroll inline-block">
+    <ul>
+      <% @works.each_with_index do |work, i| %>
+          <li value=<%= i+1 %> <% if i==0 %> class="selected-work" <% end %>><%= work.title %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="work-content inline-block">
+    <span class="inline-block"><%= image_tag '', size: '400x300', id: 'work-image' %></span>
+    <div class="work-right-content inline-block">
+      <h1>Title: <%= @work.title %></h1>
+      <p>関連url: <%= @work.url %></p>
+      <p>status: <%= @work.status %></p>
+      <p>公開日: <%= @work.release_at.strftime("%Y/%m/%d") %></p>
+      <div>
+        <p>Skill</p>
+        <% @work.skills.each do |skill| %>
+          <span><%= skill.name %> </span>
+        <% end %>
+      </div>
+    </div>
+    <p id="work-content"><%= @work.content %></p>
+  </div>
+</div>

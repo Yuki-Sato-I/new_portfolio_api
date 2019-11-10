@@ -1,0 +1,11 @@
+<div class="profile-container">
+  <span><%= image_tag '', size: '200x200' %></span>
+  <div class="profile inline-block">
+    <h1><%= @user.name %></h1>
+    <p>年齢: <%= @user.age %>歳</p>
+    <p>職業: <%= @user.profession %></p>
+  </div>
+  <div class="user-content">
+    <p><%= @user.content %></p>
+  </div>
+</div>
