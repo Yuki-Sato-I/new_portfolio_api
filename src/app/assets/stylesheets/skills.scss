@@ -1,3 +1,24 @@
 // Place all the styles related to the skills controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.skill-container {
+  width: 1150px;
+  margin: 0 auto;
+}
+
+.skill-block {
+  display: inline-block;
+  margin: 20px 5px;
+  span {
+    display: inline-block;
+    height: 50px;
+    vertical-align: top;
+    line-height: 50px;
+  }
+  .skill-name {
+    text-align: center;
+    width: 160px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}

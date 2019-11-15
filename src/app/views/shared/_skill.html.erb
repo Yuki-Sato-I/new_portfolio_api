@@ -1,5 +1,7 @@
 <div class="skill-container none">
   <% @skills.each do |skill| %>
-    <p><%= skill.name %></p>
+    <div class="skill-block">
+      <span><%= image_tag skill.image.to_s, size: '50x50'%></span><span class="skill-name"><%= skill.name %></span>
+    </div>
   <% end %>
 </div>
