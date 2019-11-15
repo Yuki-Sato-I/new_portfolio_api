@@ -36,6 +36,26 @@ $(function(){
     })
     .fail(function(){
       alert('検索に失敗しました');
-    })
-  })
+    });
+  });
+
+  $('.work-add-btn').on('click', function(){
+    $('.work-form').removeClass('none');
+    $(this).addClass('none');
+  });
+  $('.work-cancel-btn').on('click', function(){
+    $('.work-form').addClass('none');
+    $('.work-add-btn').removeClass('none');
+  });
+  
+  $('.work-add-container').on('ajax:success', 'form', function(e) {
+    console.log(e.detail[0])
+    $('#work_title').val('');
+    $('#work_content').val('');
+    $('#work_url').val('');
+    $('#work_title').val('');
+    $('.works').append('<li value=' + e.detail[0]['id'] + '>' + e.detail[0]['title'] +'</li>');
+    $('.work-form').addClass('none');
+    $('.work-add-btn').removeClass('none');
+  });
 });

@@ -1,6 +1,6 @@
 <div class="work-container none">
   <div class="work-scroll inline-block">
-    <ul>
+    <ul class="works">
       <% @works.each_with_index do |work, i| %>
           <li value=<%= i+1 %> <% if i==0 %> class="selected-work" <% end %>><%= work.title %></li>
       <% end %>
@@ -21,5 +21,36 @@
       </div>
     </div>
     <p id="work-content"><%= @work.content %></p>
+  </div>
+  <div class="work-add-container">
+    <span class="work-add-btn">+</span>
+    <div class="work-form none">
+      <%= form_with model: Work.new do |f| %>
+        <div class="input-container">
+          <%= f.label :title, '作品タイトル' %>
+          <%= f.text_field :title, class: 'input-work' %>
+          <%= f.label :image, '画像を選択', class: 'file-select' %>
+          <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
+          <%= f.label :content, '内容' %>
+          <%= f.text_area :content, rows: 5, class: 'input-work' %>
+          <%= f.label :url, '公開url' %>
+          <%= f.text_field :url, class: 'input-url input-work' %>
+          <%= f.label :release_at, '公開日時' %>
+          <%= f.date_select :release_at %>
+          <%= f.label :status, 'ステータス' %>
+          <%= f.select :status, {'公開' => 1, '非公開' => 0} %>
+          <%= f.label :skills %>
+          <%= collection_check_boxes(:work, :skill_ids, Skill.all, :id, :name) do |b| %>
+            <%= b.label { b.check_box + b.text } %>
+          <% end %>
+        </div>
+        <div class="btn-container">
+          <div class="work-btns">
+            <span class="work-cancel-btn">キャンセル</span>
+            <%= f.submit "登録", class: 'work-submit-btn' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

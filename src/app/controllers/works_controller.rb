@@ -11,7 +11,9 @@ class WorksController < ApplicationController
   end
 
   def create
-
+    work = Work.new(work_params)
+    work.save
+    render :json => work
   end
 
   def show
@@ -29,4 +31,9 @@ class WorksController < ApplicationController
   def destroy
     
   end
+
+  private
+    def work_params
+      params.require(:work).permit(:title, :image, :content, :url, :status, :release_at, {:skill_ids => []})
+    end
 end
