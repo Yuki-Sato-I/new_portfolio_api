@@ -1,5 +1,16 @@
 <div class="history-container none">
-  <% @histories.each do |history| %>
-    <p><%= history.title %></p>
-  <% end %>
+	<div class="main">
+		<ul class="cbp_tmtimeline">
+      <% @histories.each do |history| %>
+        <li>
+          <time class="cbp_tmtime"><span><%= history.start_at.strftime('%Y') %></span> <span><%= history.start_at.strftime('%m/%d') %></span></time>
+          <div class="cbp_tmicon cbp_tmicon-phone"></div>
+          <div class="cbp_tmlabel">
+            <h2><%= history.title %></h2>
+            <p><%= history.content %></p>
+          </div>
+        </li>
+      <% end %>
+		</ul>
+	</div>
 </div>

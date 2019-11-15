@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @works = Work.all
     @work = Work.find(1)
     @skills = Skill.all
-    @histories = History.all
+    @histories = History.all.order(:start_at)
   end
 
   def edit
