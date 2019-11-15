@@ -1,7 +1,28 @@
 <div class="skill-container none">
-  <% @skills.each do |skill| %>
-    <div class="skill-block">
-      <span><%= image_tag skill.image.to_s, size: '50x50'%></span><span class="skill-name"><%= skill.name %></span>
+  <div class="skills">
+    <% @skills.each do |skill| %>
+      <div class="skill-block">
+        <span><%= image_tag '', size: '50x50'%></span><span class="skill-name"><%= skill.name %></span>
+      </div>
+    <% end %>
+  </div>
+  <div class="skill-add-container">
+    <span class="skill-add-btn">+</span>
+    <div class="skill-form none">
+      <%= form_with model: Skill.new do |f| %>
+        <div class="input-container">
+          <%= f.label :name, 'スキル名' %>
+          <%= f.text_field :name %>
+          <%= f.label :image, 'ロゴ画像を選択', class: 'file-select' %>
+          <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
+        </div>
+        <div class="btn-container">
+          <div class="skill-btns">
+            <span class="skill-cancel-btn">キャンセル</span>
+            <%= f.submit "登録", class: 'skill-submit-btn' %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

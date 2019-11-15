@@ -7,7 +7,9 @@ class SkillsController < ApplicationController
   end
 
   def create
-
+    skill = Skill.new(skill_params)
+    skill.save
+    render :json => skill
   end
 
   def show
@@ -23,4 +25,9 @@ class SkillsController < ApplicationController
   def destroy
     
   end
+
+  private
+    def skill_params
+      params.require(:skill).permit(:name, :image)
+    end
 end
