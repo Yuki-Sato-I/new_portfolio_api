@@ -1,4 +1,29 @@
 <div class="history-container none">
+  <div class="history-add-container">
+    <span class="history-add-btn">+</span>
+    <div class="history-form none">
+      <%= form_with model: History.new do |f| %>
+        <div class="input-container">
+          <%= f.label :title, 'タイトル' %>
+          <%= f.text_field :title %>
+          <%= f.label :image, 'ロゴ画像を選択', class: 'file-select' %>
+          <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
+          <%= f.label :content, '内容' %>
+          <%= f.text_area :content, rows: 5, class: 'input-history' %>
+          <%= f.label :start_at, '開始日時' %>
+          <%= f.date_select :start_at %>
+          <%= f.label :end_at, '終了日時' %>
+          <%= f.date_select :end_at %>
+        </div>
+        <div class="btn-container">
+          <div class="history-btns">
+            <span class="history-cancel-btn">キャンセル</span>
+            <%= f.submit "登録", class: 'history-submit-btn' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 	<div class="main">
 		<ul class="cbp_tmtimeline">
       <% @histories.each do |history| %>
@@ -7,6 +32,7 @@
           <div class="cbp_tmicon cbp_tmicon-phone"></div>
           <div class="cbp_tmlabel">
             <h2><%= history.title %></h2>
+            <p><%= image_tag '', size: '400x250', id: 'work-image' %></p>
             <p><%= history.content %></p>
           </div>
         </li>

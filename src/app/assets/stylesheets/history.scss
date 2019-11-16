@@ -216,3 +216,91 @@ body {
 .icon-arrow-left:before {
 	content: "\f060";
 }
+
+
+//////////////
+
+.history-form {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  padding: 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 3px #ff6a5c;
+  .input-container {
+    label {
+      vertical-align: top;
+      font-weight: bold;
+      display: block;
+      width: 200px;
+    }
+  }
+  input.input-history {
+    font-size: 20px;
+    border: solid 1px lightgray;
+    width: 250px;
+    height: 30px;
+    background-color: white;
+  }
+  textarea {
+    font-size: 20px;
+    border: solid 1px lightgray;
+    width: 380px;
+  }
+  .btn-container {
+    text-align: center;
+    margin-top: 20px;
+    .history-submit-btn {
+      vertical-align: top;
+      border: solid 1px #464E58;
+      background-color: #ff6a5c;
+      height: 40px;
+      width: 120px;
+      color: white;
+      cursor: pointer;
+    }
+    .history-cancel-btn {
+      display: inline-block;
+      border: solid 1px #464E58;
+      background-color: white;
+      line-height: 40px;
+      height: 40px;
+      width: 120px;
+      cursor: pointer;
+    }
+  }
+  span {
+    margin: 0;
+  }
+  div {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+
+.history-add-container {
+	margin-top: 30px;
+	input {
+    font-size: 20px;
+    border: solid 1px lightgray;
+    width: 250px;
+    height: 30px;
+    background-color: white;
+  }
+  .history-add-btn {
+		text-align: center;
+		display: block;
+    margin:0 auto;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px #fda299;
+    width: 50px;
+    height: 50px;
+    background-color: #ff6a5c;
+    cursor: pointer;
+  }
+}
