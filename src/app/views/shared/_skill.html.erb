@@ -12,9 +12,9 @@
       <%= form_with model: Skill.new do |f| %>
         <div class="input-container">
           <%= f.label :name, 'スキル名' %>
-          <%= f.text_field :name %>
+          <%= f.text_field :name, required: true %>
           <%= f.label :image, 'ロゴ画像を選択', class: 'file-select' %>
-          <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
+          <%= f.file_field :image, class: 'none', required: true, accept: 'image/jpg,image/jpeg,image/png' %>
         </div>
         <div class="btn-container">
           <div class="skill-btns">

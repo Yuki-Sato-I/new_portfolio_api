@@ -5,15 +5,15 @@
       <%= form_with model: History.new do |f| %>
         <div class="input-container">
           <%= f.label :title, 'タイトル' %>
-          <%= f.text_field :title %>
+          <%= f.text_field :title, required: true %>
           <%= f.label :image, 'ロゴ画像を選択', class: 'file-select' %>
           <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
           <%= f.label :content, '内容' %>
-          <%= f.text_area :content, rows: 5, class: 'input-history' %>
+          <%= f.text_area :content, rows: 5, class: 'input-history', required: true %>
           <%= f.label :start_at, '開始日時' %>
-          <%= f.date_select :start_at %>
+          <%= f.date_select :start_at, required: true %>
           <%= f.label :end_at, '終了日時' %>
-          <%= f.date_select :end_at %>
+          <%= f.date_select :end_at, required: true %>
         </div>
         <div class="btn-container">
           <div class="history-btns">
