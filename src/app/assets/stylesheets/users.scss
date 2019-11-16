@@ -40,6 +40,7 @@
     p {
       margin-bottom: 5px;
     }
+
   }
 
   .work-scroll {
@@ -66,5 +67,10 @@
     width: calc(100% - 260px);
     vertical-align: top;
     overflow: scroll;
+
+    p#work-content {
+      width: 85%;
+      margin: 0 auto;
+    }
   }
 }
