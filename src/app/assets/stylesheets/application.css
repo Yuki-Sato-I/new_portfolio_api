@@ -75,3 +75,7 @@ i {
 .inline-block {
 	display: inline-block;
 }
+
+.container {
+	margin-top: 130px;
+}

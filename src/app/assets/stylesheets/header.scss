@@ -1,5 +1,11 @@
 .selection-bar {
-  line-height: 130px;
+  line-height: 100px;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
   ul {
     font-size: 0;
     width: calc(100% - 100px);
