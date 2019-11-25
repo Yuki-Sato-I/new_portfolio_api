@@ -9,12 +9,13 @@ $(function(){
     }
 
     var date = new Date(data.release_at);
+    var status = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
 
     $('#work-image').attr('src', data.image);
     var html = $('.work-right-content').empty();
     html.append('<h1>Title: ' + data.title + '</h1>');
     html.append('<p>関連url: ' + data.url + '</p>');
-    html.append('<p>status: ' + data.status + '</p>');
+    html.append('<p>status: ' + status[data.status] + '</p>');
     html.append('<p>公開日: ' + date.getFullYear() + '/' +  zeroPadding(date.getMonth() + 1) + '/' + zeroPadding(date.getDate())+ '</p>');
     html.append('<div><p>Skill</p>' + skillText + '</div>');
     $('#work-content').empty().append(data.content);

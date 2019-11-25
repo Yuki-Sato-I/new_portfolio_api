@@ -1,3 +1,6 @@
+<% 
+  status = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)']
+%>
 <div class="work-container none">
   <div class="work-scroll inline-block">
     <ul class="works">
@@ -11,7 +14,7 @@
     <div class="work-right-content inline-block">
       <h1>Title: <%= @work.title %></h1>
       <p>関連url: <%= @work.url %></p>
-      <p>status: <%= @work.status %></p>
+      <p>status: <%= status[@work.status] %></p>
       <p>公開日: <%= @work.release_at.strftime("%Y/%m/%d") %></p>
       <div>
         <p>Skill</p>
@@ -38,7 +41,7 @@
           <%= f.label :release_at, '公開日時' %>
           <%= f.date_select :release_at, required: true %>
           <%= f.label :status, 'ステータス' %>
-          <%= f.select :status, {'ポートフォリオに公開/ネットに未公開' => 2,'ポートフォリオに公開/ネットに公開' => 1, 'ポートフォリオに公開しない' => 0}, required: true %>
+          <%= f.select :status, { 'ポートフォリオに公開しない' => 0, 'ポートフォリオに公開/ネットに公開' => 1, 'ポートフォリオに公開/ネットに未公開' => 2, '注目作品(トップページに表示)' => 3 }, required: true %>
           <%= f.label :skills %>
           <%= collection_check_boxes(:work, :skill_ids, Skill.all, :id, :name) do |b| %>
             <%= b.label { b.check_box + b.text } %>
