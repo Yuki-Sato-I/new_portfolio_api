@@ -1,9 +1,14 @@
 <div class="profile-container">
-  <span><%= image_tag '', size: '200x200' %></span>
+  <div class="user-edit-btns">
+    <button class="none user-edit-cancel-btn">cansel</button>
+    <button class="none user-edit-save-btn">save</button>
+    <span class="user-edit-btn"><i class="far fa-edit fa-2x"></i></span>
+  </div>
+  <span><%= image_tag '', size: '200x200', id: 'user-image' %></span>
   <div class="profile inline-block">
     <h1><%= @user.name %>/<%= @user.en_name %></h1>
-    <p>年齢: <%= @user.age %>歳</p>
-    <p>職業: <%= @user.profession %></p>
+    <p class="user-age">年齢: <%= @user.age %>歳</p>
+    <p class="user-profession">職業: <%= @user.profession %></p>
   </div>
   <div class="user-content">
     <h3>Profile</h3>

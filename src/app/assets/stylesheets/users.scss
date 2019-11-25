@@ -7,6 +7,7 @@
 }
 
 .profile-container {
+  position: relative;
 
   span img {
     margin: 50px;
@@ -17,6 +18,25 @@
     vertical-align: top;
     height: 200px;
     margin: 50px 0;
+    .user-text-input {
+      border: solid 1px lightgray;
+      font-weight: bold;
+      font-size: 30px;
+      height: 50px;
+    }
+    .user-number-input, .user-profession-input {
+      width: 50px;
+      height: 20px;
+      padding: 15px 5px;
+      border: solid 1px lightgray;
+      font-size: 20px;
+    }
+  }
+
+  .user-textarea-input {
+    width: 100%;
+    font-size: 16px;
+    border: solid 1px lightgray;
   }
 
   .user-content, .user-service {
@@ -24,6 +44,35 @@
     margin: 15px auto;
     p {
       margin-left: 15px;
+    }
+  }
+
+  .user-edit-btns {
+    text-align: right;
+    svg.fa-edit {
+      position: absolute;
+        right: 15px;
+        top: 15px;
+      cursor: pointer;
+    }
+
+    button {
+      font-weight: bold;
+      height: 40px;
+      width: 120px;
+      font-size: 20px;
+      text-align: center;
+      border-style: none;
+      border: solid 1px #464E58;
+    }
+
+    .user-edit-save-btn{
+      background-color: #ff6a5c;
+      color: white;
+    }
+
+    .user-edit-cancel-btn{
+      color: #464E58;
     }
   }
 }

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    gon.user = @user
     @works = Work.all
     @work = Work.find(1)
     @skills = Skill.all
@@ -21,10 +22,18 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    user = User.find(params[:id])
+    user.update(user_params)
+    user = User.find(params[:id]) #ちょっとここいるかどうか検証必要
+    render json: user
   end
 
   def destroy
     
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:name, :en_name, :age, :profession, :content, :service, :image)
+    end
 end
