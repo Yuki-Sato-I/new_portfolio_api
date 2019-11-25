@@ -4,6 +4,9 @@ class CreateWorks < ActiveRecord::Migration[6.0]
       t.string :image
       t.string :title
       t.text :content
+      t.text :reason
+      t.text :appeal
+      t.string :period
       t.string :url
       t.integer :status
       t.datetime :release_at

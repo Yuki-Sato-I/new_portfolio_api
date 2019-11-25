@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 2019_11_05_121701) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "image"
     t.string "name"
+    t.string "en_name"
     t.integer "age"
     t.string "profession"
     t.text "content"
+    t.text "service"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -53,6 +55,9 @@ ActiveRecord::Schema.define(version: 2019_11_05_121701) do
     t.string "image"
     t.string "title"
     t.text "content"
+    t.text "reason"
+    t.text "appeal"
+    t.string "period"
     t.string "url"
     t.integer "status"
     t.datetime "release_at"
