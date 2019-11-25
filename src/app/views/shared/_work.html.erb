@@ -16,6 +16,7 @@
       <p>関連url: <%= @work.url %></p>
       <p>status: <%= status[@work.status] %></p>
       <p>公開日: <%= @work.release_at.strftime("%Y/%m/%d") %></p>
+      <p>制作期間: <%= @work.period %></p>
       <div>
         <p>Skill</p>
         <% @work.skills.each do |skill| %>
@@ -23,7 +24,18 @@
         <% end %>
       </div>
     </div>
-    <p id="work-content"><%= @work.content %></p>
+    <div>
+      <h3>作品概要</h3>
+      <p class="work-content-text work-text"><%= @work.content %></p>
+    </div>
+    <div>
+      <h3>制作までの過程</h3>
+      <p class="work-reason-text work-text"><%= @work.reason %></p>
+    </div>
+    <div>
+      <h3>開発物アピール</h3>
+      <p class="work-appeal-text work-text"><%= @work.appeal %></p>
+    </div>
   </div>
   <div class="work-add-container">
     <span class="work-add-btn">+</span>
@@ -34,8 +46,14 @@
           <%= f.text_field :title, class: 'input-work', required: true %>
           <%= f.label :image, '画像を選択', class: 'file-select' %>
           <%= f.file_field :image, class: 'none', accept: 'image/jpg,image/jpeg,image/png' %>
-          <%= f.label :content, '内容' %>
+          <%= f.label :content, '作品概要' %>
           <%= f.text_area :content, rows: 5, class: 'input-work', required: true %>
+          <%= f.label :reason, '制作過程' %>
+          <%= f.text_area :reason, rows: 5, class: 'input-work', required: true %>
+          <%= f.label :appeal, '開発物アピール' %>
+          <%= f.text_area :appeal, rows: 5, class: 'input-work', required: true %>
+          <%= f.label :period, '制作期間' %>
+          <%= f.text_field :period, class: 'input-url input-work', required: true %>
           <%= f.label :url, '公開url' %>
           <%= f.text_field :url, class: 'input-url input-work', required: true %>
           <%= f.label :release_at, '公開日時' %>

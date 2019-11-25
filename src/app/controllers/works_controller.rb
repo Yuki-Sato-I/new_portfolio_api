@@ -34,6 +34,6 @@ class WorksController < ApplicationController
 
   private
     def work_params
-      params.require(:work).permit(:title, :image, :content, :url, :status, :release_at, {:skill_ids => []})
+      params.require(:work).permit(:title, :image, :content, :reason, :appeal, :period, :url, :status, :release_at, {:skill_ids => []})
     end
 end

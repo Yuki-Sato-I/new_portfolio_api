@@ -19,9 +19,12 @@
     margin: 50px 0;
   }
 
-  .user-content {
+  .user-content, .user-service {
     width: calc(100% - 100px);
-    margin: 0 auto;
+    margin: 15px auto;
+    p {
+      margin-left: 15px;
+    }
   }
 }
 
@@ -72,9 +75,8 @@
     vertical-align: top;
     overflow: scroll;
 
-    p#work-content {
-      width: 85%;
-      margin: 0 auto;
+    p.work-text {
+      margin-left: 10px;
     }
   }
 }

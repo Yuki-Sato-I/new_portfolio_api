@@ -17,8 +17,11 @@ $(function(){
     html.append('<p>関連url: ' + data.url + '</p>');
     html.append('<p>status: ' + status[data.status] + '</p>');
     html.append('<p>公開日: ' + date.getFullYear() + '/' +  zeroPadding(date.getMonth() + 1) + '/' + zeroPadding(date.getDate())+ '</p>');
+    html.append('<p>制作期間: ' + data.period + '</p>');
     html.append('<div><p>Skill</p>' + skillText + '</div>');
-    $('#work-content').empty().append(data.content);
+    $('.work-content-text').empty().append(data.content);
+    $('.work-reason-text').empty().append(data.reason);
+    $('.work-appeal-text').empty().append(data.appeal);
   }
 
   $('.work-scroll ul li').click(function() {

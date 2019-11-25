@@ -1,11 +1,16 @@
 <div class="profile-container">
   <span><%= image_tag '', size: '200x200' %></span>
   <div class="profile inline-block">
-    <h1><%= @user.name %></h1>
+    <h1><%= @user.name %>/<%= @user.en_name %></h1>
     <p>年齢: <%= @user.age %>歳</p>
     <p>職業: <%= @user.profession %></p>
   </div>
   <div class="user-content">
+    <h3>Profile</h3>
     <p><%= @user.content %></p>
+  </div>
+  <div class="user-service">
+    <h3>Service</h3>
+    <p><%= @user.service %></p>
   </div>
 </div>
