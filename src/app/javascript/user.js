@@ -15,7 +15,7 @@ $(function(){
     $(this).addClass('none');
     $('.user-edit-cancel-btn').removeClass('none');
     $('.user-edit-save-btn').removeClass('none');
-    $('.user-age').empty().append('年齢: <input class="user-number-input user-age-input" type="text" value="'+ gon.user.age +'">歳');
+    $('.user-age').empty().append('年齢: <input class="user-number-input user-age-input" type="number" value="'+ gon.user.age +'">歳');
     $('.user-profession').empty().append('職業: <input class="user-profession-input" type="text" value="'+ gon.user.profession +'">');
     $('.profile h1').empty().append('<input class="user-text-input user-name-input" type="text" value="'+ gon.user.name +'">/<input class="user-text-input user-enname-input" type="text" value="'+ gon.user.en_name +'">');
     $('.user-content p').empty().append('<textarea class="user-textarea-input user-content-input" rows="5">' + gon.user.content + '</textarea>');
