@@ -10,14 +10,19 @@
     </ul>
   </div>
   <div class="work-content inline-block">
+    <div class="work-edit-btns">
+      <button class="none work-edit-cancel-btn">cansel</button>
+      <button class="none work-edit-save-btn">save</button>
+      <span class="work-edit-btn"><i class="far fa-edit fa-2x"></i></span>
+    </div>
     <span class="inline-block"><%= image_tag '', size: '500x350', id: 'work-image' %></span>
     <div class="work-right-content inline-block">
-      <h1>Title: <%= @work.title %></h1>
-      <p>関連url: <%= @work.url %></p>
-      <p>status: <%= status[@work.status] %></p>
-      <p>公開日: <%= @work.release_at.strftime("%Y/%m/%d") %></p>
-      <p>制作期間: <%= @work.period %></p>
-      <div>
+      <h1>Title: <span><%= @work.title %></span></h1>
+      <p>関連url: <span><%= @work.url %></span></p>
+      <p>status: <span id=<%= @work.id %>><%= status[@work.status] %></span></p>
+      <p>公開日: <span><%= @work.release_at.strftime("%Y/%m/%d") %></span></p>
+      <p>制作期間: <span><%= @work.period %></span></p>
+      <div class="skill-content">
         <p>Skill</p>
         <% @work.skills.each do |skill| %>
           <span><%= skill.name %> </span>

@@ -25,7 +25,10 @@ class WorksController < ApplicationController
   end
 
   def update
-
+    work = Work.find(params[:id])
+    work.update(work_params)
+    work = Work.find(params[:id]) #ちょっとここいるかどうか検証必要
+    render json: work
   end
 
   def destroy
