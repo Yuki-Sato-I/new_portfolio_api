@@ -76,6 +76,8 @@ $(function(){
     $('.work-add-btn').removeClass('none');
   });
 
+  var selectedWork = "";
+
   $('.work-edit-btn').on('click', function(){
     $(this).addClass('none');
     $('.work-edit-cancel-btn').removeClass('none');
@@ -90,6 +92,20 @@ $(function(){
     var content = $('.work-content-text').text();
     var reason = $('.work-reason-text').text();
     var appeal = $('.work-appeal-text').text();
+
+    selectedWork = {
+      id: id,
+      title: title,
+      url: url,
+      status: status,
+      release_at: releaseDate,
+      period: period,
+      content: content,
+      reason: reason,
+      appeal: appeal
+    }
+    console.log(selectedWork);
+
    
     var statusArray = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
     var statusHtml = '<select class="work-status-input">';
@@ -116,7 +132,8 @@ $(function(){
     $(this).addClass('none');
     $('.work-edit-save-btn').addClass('none');
     $('.work-edit-btn').removeClass('none');
-    //reBuild(gon.user);
+    buildWorkHTML(selectedWork);
+    console.log(selectedWork);
   });
 
   $('.work-edit-save-btn').on('click', function(){
