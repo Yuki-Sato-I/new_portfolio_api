@@ -31,3 +31,20 @@ class HistoriesController < ApplicationController
       params.require(:history).permit(:title, :image, :content, :start_at, :end_at)
     end
 end
+module Api
+  module V1
+    class HistoriesController < ApplicationController
+
+      def api_index
+        histories = History.all
+        render json: histories
+      end
+      
+      def api_show
+        history = History.find(params[:id])
+        render json: history
+      end
+
+    end
+  end
+end

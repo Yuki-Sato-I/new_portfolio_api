@@ -40,3 +40,23 @@ class WorksController < ApplicationController
       params.require(:work).permit(:title, :image, :content, :reason, :appeal, :period, :url, :status, :release_at, {:skill_ids => []})
     end
 end
+
+module Api
+  module V1
+    class WorksController < ApplicationController
+
+      def api_index
+        works = Work.where.not(status: 0)
+        render json: works
+      end
+      def api_show
+        works = Work.find(params[:id])
+        render json: works
+      end
+      def api_top
+        topWorks = Work.where(status: 3)
+        render json: topWorks
+      end
+    end
+  end
+end

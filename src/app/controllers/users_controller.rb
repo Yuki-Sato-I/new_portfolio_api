@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   end
 
+
   def show
     @user = User.find(params[:id])
     gon.user = @user
@@ -36,4 +37,16 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :en_name, :age, :profession, :content, :service, :image)
     end
+end
+
+module Api
+  module V1
+    class UsersController < ApplicationController
+
+      def api_show
+        user = User.find(params[:id])
+        render json: user
+      end
+    end
+  end
 end

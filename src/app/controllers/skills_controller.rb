@@ -31,3 +31,19 @@ class SkillsController < ApplicationController
       params.require(:skill).permit(:name, :image)
     end
 end
+
+module Api
+  module V1
+    class SkillsController < ApplicationController
+
+      def api_index
+        skills = Skill.all
+        render json: skills
+      end
+      def api_show
+        skill = Skill.find(params[:id])
+        render json: skill
+      end
+    end
+  end
+end
