@@ -20,4 +20,5 @@ WORKDIR $APP_HOME
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-COPY . $APP_HOME
+COPY ./src $APP_HOME
+CMD ["rails", "server", "-b", "0.0.0.0"]
