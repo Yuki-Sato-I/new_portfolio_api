@@ -1,0 +1,17 @@
+<h1 class="site-title">Site Administration of Yuki's PortFolio </h1>
+<div class="login-form">
+  <h1>Log in</h1>
+  <%= form_for(:session, url: login_path) do |f| %>
+    <div class="form-box">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'login-input-form' %>
+    </div>
+    <div class="form-box">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'login-input-form' %>
+    </div>
+    <div class="btn-box">
+      <%= f.submit "Log in", class: "login-btn" %>
+    </div>
+  <% end %>
+</div>

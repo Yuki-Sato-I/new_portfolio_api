@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  root 'sessions#new'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  resources :users
+  resources :works
+  resources :skills
+  resources :histories
+
   namespace 'api' do
     namespace 'v1' do
       get '/users/:id', to: 'users#api_show'
@@ -11,8 +21,5 @@ Rails.application.routes.draw do
       get '/histories/:id', to: 'histories#api_show'
     end
   end
-  resources :users
-  resources :works
-  resources :skills
-  resources :histories
+  
 end

@@ -1,5 +1,5 @@
 class HistoriesController < ApplicationController
-
+  before_action :logged_in_user, only: [:create, :update]
   def create
     history = History.new(history_params)
     history.save

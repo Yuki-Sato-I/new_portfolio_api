@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-
+  before_action :logged_in_user, only: :create
   def create
     skill = Skill.new(skill_params)
     skill.save

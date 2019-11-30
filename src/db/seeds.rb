@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(image: "image", name: '佐藤 裕紀', en_name: 'Yuki Sato', age: 21, profession: '学生', content: '自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。', service: '自分が何を重視しているか入りますz')
+User.create!(image: "image", name: '佐藤 裕紀', email: 'yukitryprogram@gmail.com', password: "foobar", password_confirmation: "foobar", en_name: 'Yuki Sato', age: 21, profession: '学生', content: '自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。', service: '自分が何を重視しているか入りますz')
 
 
 (1..10).each do |num|

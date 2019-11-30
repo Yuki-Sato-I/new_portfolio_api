@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  
+  before_action :logged_in_user, only: [:create, :update, :show]
   def create
     work = Work.new(work_params)
     work.save

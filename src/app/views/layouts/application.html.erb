@@ -14,5 +14,10 @@
   <body>
     <%= render 'shared/header' %>
     <%= yield %>
+    <% if current_user %>
+      <div class="logout-btn">
+        <%= link_to "Log out", logout_path, method: :delete %>
+      </div>
+    <% end %>
   </body>
 </html>
