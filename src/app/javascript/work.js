@@ -17,7 +17,7 @@ $(function(){
     var date = new Date(data.release_at);
     var status = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
 
-    $('#work-image').attr('src', data.image);
+    $('#work-image').attr('src', data.image_url);
     var html = $('.work-right-content').empty();
     html.append('<h1>Title: <span>' + data.title + '</span></h1>');
     html.append('<p>関連url: <span>' + data.url + '</span></p>');

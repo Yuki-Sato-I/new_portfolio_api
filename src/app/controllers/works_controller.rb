@@ -8,7 +8,7 @@ class WorksController < ApplicationController
 
   def show
     work = Work.find(params[:id])
-    render json: work, methods: :skills
+    render json: work, methods: [:image_url, :skills]
   end
 
   def update
@@ -34,8 +34,8 @@ module Api
       end
 
       def api_show
-        works = Work.find(params[:id])
-        render json: works, methods: [:image_url]
+        work = Work.find(params[:id])
+        render json: work, methods: [:image_url]
       end
 
       def api_top

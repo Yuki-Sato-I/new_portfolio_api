@@ -3,7 +3,7 @@ class SkillsController < ApplicationController
   def create
     skill = Skill.new(skill_params)
     skill.save
-    render :json => skill
+    render json: skill, methods: [:image_url]
   end
 
   private

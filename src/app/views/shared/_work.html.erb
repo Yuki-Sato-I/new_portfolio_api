@@ -17,7 +17,7 @@
     </div>
     <span class="inline-block">
       <% if @work.image.attached? %>
-        <%= image_tag '', size: '500x350', id: 'work-image' %>
+        <%= image_tag @work.image, size: '500x350', id: 'work-image' %>
       <% else %>
         <%= image_tag '', size: '500x350', id: 'work-image' %>
       <% end %>
