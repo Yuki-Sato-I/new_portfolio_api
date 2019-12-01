@@ -32,7 +32,11 @@
           <div class="cbp_tmicon cbp_tmicon-phone"></div>
           <div class="cbp_tmlabel">
             <h2><%= history.title %></h2>
-            <p><%= image_tag '', size: '400x250', id: 'work-image' %></p>
+            <% if history.image.attached? %>
+              <p><%= image_tag history.image, size: '400x250', id: 'work-image' %></p>
+            <% else %>
+              <p><%= image_tag '', size: '400x250', id: 'work-image' %></p>
+            <% end %>
             <p><%= history.content %></p>
           </div>
         </li>

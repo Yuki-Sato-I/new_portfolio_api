@@ -4,7 +4,13 @@
     <button class="none user-edit-save-btn">save</button>
     <span class="user-edit-btn"><i class="far fa-edit fa-2x"></i></span>
   </div>
-  <span><%= image_tag '', size: '200x200', id: 'user-image' %></span>
+  <span>
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image, size: '200x200', id: 'user-image' %>
+  <% else %>
+    <%= image_tag '', size: '200x200', id: 'user-image' %>
+  <% end %>
+  </span>
   <div class="profile inline-block">
     <h1><%= @user.name %>/<%= @user.en_name %></h1>
     <p class="user-age">年齢: <%= @user.age %>歳</p>
