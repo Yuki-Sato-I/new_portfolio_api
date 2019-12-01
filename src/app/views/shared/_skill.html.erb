@@ -2,7 +2,11 @@
   <div class="skills">
     <% @skills.each do |skill| %>
       <div class="skill-block">
+      <% if skill.image.attached? %>
+        <span><%= image_tag skill.image, size: '50x50'%></span><span class="skill-name"><%= skill.name %></span>
+      <% else %>
         <span><%= image_tag '', size: '50x50'%></span><span class="skill-name"><%= skill.name %></span>
+      <% end %>
       </div>
     <% end %>
   </div>

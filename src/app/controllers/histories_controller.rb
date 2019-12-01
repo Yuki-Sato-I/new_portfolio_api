@@ -28,7 +28,7 @@ module Api
 
       def api_show
         history = History.find(params[:id])
-        render json: history
+        render json: history, methods: [:image_url]
       end
 
     end
