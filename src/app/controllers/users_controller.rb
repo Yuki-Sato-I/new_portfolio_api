@@ -29,7 +29,7 @@ module Api
 
       def api_show
         user = User.find(params[:id])
-        render json: user
+        render json: user, methods: [:image_url]
       end
 
     end

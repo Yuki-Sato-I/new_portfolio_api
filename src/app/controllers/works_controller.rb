@@ -35,7 +35,7 @@ module Api
 
       def api_show
         works = Work.find(params[:id])
-        render json: works
+        render json: works, methods: [:image_url]
       end
 
       def api_top

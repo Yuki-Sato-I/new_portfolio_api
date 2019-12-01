@@ -23,7 +23,7 @@ module Api
       
       def api_show
         skill = Skill.find(params[:id])
-        render json: skill
+        render json: skill, methods: [:image_url]
       end
 
     end
