@@ -15,5 +15,15 @@ module AppName
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        # 許可するドメイン
+        origins Rails.application.credentials.accept_host, "example.com"
+        # 許可するヘッダとメソッドの種類
+        resource "*",
+                 headers: :any,
+                 methods: [:get, :post, :patch, :delete, :head, :options]
+      end
+    end
   end
 end
