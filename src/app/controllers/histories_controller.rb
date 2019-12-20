@@ -23,7 +23,7 @@ module Api
 
       def api_index
         histories = History.all
-        render json: histories
+        render json: histories, methods: [:image_url]
       end
 
       def api_show

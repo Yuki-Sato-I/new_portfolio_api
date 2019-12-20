@@ -30,7 +30,7 @@ module Api
 
       def api_index
         works = Work.where.not(status: 0)
-        render json: works
+        render json: works, methods: [:image_url]
       end
 
       def api_show
@@ -40,7 +40,7 @@ module Api
 
       def api_top
         topWorks = Work.where(status: 3)
-        render json: topWorks
+        render json: topWorks, methods: [:image_url]
       end
 
     end

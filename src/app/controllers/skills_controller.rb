@@ -18,7 +18,7 @@ module Api
 
       def api_index
         skills = Skill.all
-        render json: skills
+        render json: skills, methods: [:image_url]
       end
       
       def api_show
