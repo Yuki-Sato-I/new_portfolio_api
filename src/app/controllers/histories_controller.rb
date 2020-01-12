@@ -22,7 +22,12 @@ module Api
     class HistoriesController < ApplicationController
 
       def api_index
-        histories = History.all
+        page = params[:page] ? params[:page].to_i : 1
+        limit = params[:limit] ? params[:limit].to_i : 25
+        offset = limit * (page - 1);
+
+        histories = History.limit(limit).offset(offset)
+
         render json: histories, methods: [:image_url]
       end
 
