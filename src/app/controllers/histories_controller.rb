@@ -26,7 +26,7 @@ module Api
         limit = params[:limit] ? params[:limit].to_i : 25
         offset = limit * (page - 1);
 
-        histories = History.limit(limit).offset(offset)
+        histories = History.limit(limit).offset(offset).order(:start_at)
 
         render json: histories, methods: [:image_url]
       end
