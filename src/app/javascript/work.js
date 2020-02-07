@@ -1,7 +1,9 @@
-$(function(){
-  function buildWorkHTML(data){
+const statusLabels = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
+var selectedWork = {};
+const zeroPadding = num => `0${num}`.substr(-2);
 
-    const zeroPadding = (num) => `0${num}`.substr(-2);
+$(() => {
+  const buildWorkHTML = data => {
     var skillText = '';
 
     if(data.skills){//skillの編集まだ実装してないから一時的
@@ -12,16 +14,13 @@ $(function(){
       skillText = $('.skill-content').html();
     }
 
-    console.log(skillText);
-
     var date = new Date(data.release_at);
-    var status = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
 
     $('#work-image').attr('src', data.image_url);
     var html = $('.work-right-content').empty();
     html.append('<h1>Title: <span>' + data.title + '</span></h1>');
     html.append('<p>関連url: <span>' + data.url + '</span></p>');
-    html.append('<p>status: <span id="' + data.id +'">' + status[data.status] + '</span></p>');
+    html.append('<p>status: <span id="' + data.id +'">' + statusLabels[data.status] + '</span></p>');
     html.append('<p>公開日: <span>' + date.getFullYear() + '/' +  zeroPadding(date.getMonth() + 1) + '/' + zeroPadding(date.getDate())+ '</span></p>');
     html.append('<p>制作期間: <span>' + data.period + '</span></p>');
     if(data.skills){//skillの編集まだ実装してないから一時的
@@ -35,8 +34,7 @@ $(function(){
   }
 
   $('.work-scroll ul li').click(function() {
-
-    var id = $(this).val();
+    const id = $(this).val();
     $('.selected-work').removeClass('selected-work');
     $(this).addClass('selected-work');
     $('.work-edit-btn').removeClass('none');
@@ -47,13 +45,8 @@ $(function(){
       type:'GET',
       url: '/works/' + id
     })
-    .done(function(data){
-      console.log(data)
-      buildWorkHTML(data);
-    })
-    .fail(function(){
-      alert('検索に失敗しました');
-    });
+    .done(data => buildWorkHTML(data))
+    .fail(() => alert('検索に失敗しました'));
   });
 
   $('.work-add-btn').on('click', function(){
@@ -66,7 +59,6 @@ $(function(){
   });
   
   $('.work-add-container').on('ajax:success', 'form', function(e) {
-    console.log(e.detail[0])
     $('#work_title').val('');
     $('#work_content').val('');
     $('#work_url').val('');
@@ -76,9 +68,7 @@ $(function(){
     $('.work-add-btn').removeClass('none');
   });
 
-  var selectedWork = "";
-
-  $('.work-edit-btn').on('click', function(){
+  $('.work-edit-btn').click(function(){
     $(this).addClass('none');
     $('.work-edit-cancel-btn').removeClass('none');
     $('.work-edit-save-btn').removeClass('none');
@@ -104,12 +94,9 @@ $(function(){
       reason: reason,
       appeal: appeal
     }
-    console.log(selectedWork);
 
-   
-    var statusArray = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
     var statusHtml = '<select class="work-status-input">';
-    statusArray.forEach(function(value, index){
+    statusLabels.forEach((value, index) => {
       if(status != index){
         statusHtml += `<option value=${index}>${value}</option>`;
       } else {
@@ -133,7 +120,6 @@ $(function(){
     $('.work-edit-save-btn').addClass('none');
     $('.work-edit-btn').removeClass('none');
     buildWorkHTML(selectedWork);
-    console.log(selectedWork);
   });
 
   $('.work-edit-save-btn').on('click', function(){
@@ -151,28 +137,24 @@ $(function(){
     var reason = $('.work-reason-input').val();
     var appeal = $('.work-appeal-input').val();
 
-    $.ajax({      
+    $.ajax({
       dataType: 'json',
       contentType: "application/json",
       url: `/works/${id}`,
       type: "PUT",
       data: JSON.stringify({
-      'title': title,
-      'url': url,
-      'image': 'image',
-      'status': status,
-      'release_at': releaseDate,
-      'period': period,
-      'reason': reason,
-      'content': content,
-      'appeal': appeal
+        'title': title,
+        'url': url,
+        'image': 'image',
+        'status': status,
+        'release_at': releaseDate,
+        'period': period,
+        'reason': reason,
+        'content': content,
+        'appeal': appeal
       })
     })
-    .done(function(data) {
-      buildWorkHTML(data);
-    })
-    .fail(function() {
-      alert('edit error');
-    });
+    .done(data =>  buildWorkHTML(data))
+    .fail(() => alert('edit error'));
   });
 });

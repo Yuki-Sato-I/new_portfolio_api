@@ -1,4 +1,4 @@
-$(function(){
+$(() => {
   $('.history-add-btn').on('click', function(){
     $('.history-form').removeClass('none');
     $(this).addClass('none');
@@ -9,7 +9,6 @@ $(function(){
   });
 
   $('.history-add-container').on('ajax:success', 'form', function(e) {
-    console.log(e.detail[0])
     $('#history_title').val('');
     $('#history_content').val('');
     $('.history-form').addClass('none');
