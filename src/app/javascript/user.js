@@ -1,6 +1,5 @@
-$(function(){
-
-  function reBuild(data) {
+$(() => {
+  const reBuild = data => {
     var profileHtml = `<h1>${data.name}/${data.en_name}</h1><p>年齢: ${data.age}歳</p><p>職業: ${data.profession}</p>`;
     var contentHtml = `<p>${data.content}</p>`;
     var serviceHtml = `<p>${data.service}</p>`;
@@ -11,7 +10,7 @@ $(function(){
     $('.user-service p').empty().append(serviceHtml);
   }
 
-  $('.user-edit-btn').on('click', function(){
+  $('.user-edit-btn').click(function(){
     $(this).addClass('none');
     $('.user-edit-cancel-btn').removeClass('none');
     $('.user-edit-save-btn').removeClass('none');
@@ -22,14 +21,14 @@ $(function(){
     $('.user-service p').empty().append('<textarea class="user-textarea-input user-service-input" rows="5">' + gon.user.service + '</textarea>');
   });
 
-  $('.user-edit-cancel-btn').on('click', function(){
+  $('.user-edit-cancel-btn').click(function(){
     $(this).addClass('none');
     $('.user-edit-save-btn').addClass('none');
     $('.user-edit-btn').removeClass('none');
     reBuild(gon.user);
   });
 
-  $('.user-edit-save-btn').on('click', function(){
+  $('.user-edit-save-btn').click(function(){
     $(this).addClass('none');
     $('.user-edit-cancel-btn').addClass('none');
     $('.user-edit-btn').removeClass('none');
@@ -41,27 +40,25 @@ $(function(){
     var content = $('.user-content-input').val();
     var service = $('.user-service-input').val();
 
-    $.ajax({      
+    $.ajax({
       dataType: 'json',
       contentType: "application/json",
       url: '/users/1',
       type: "PUT",
       data: JSON.stringify({
-      'name': name,
-      'en_name': enName,
-      'image': 'image',
-      'age': age,
-      'profession': profession,
-      'content': content,
-      'service': service
+        'name': name,
+        'en_name': enName,
+        'image': 'image',
+        'age': age,
+        'profession': profession,
+        'content': content,
+        'service': service
       })
     })
-    .done(function(data) {
+    .done(data => {
       reBuild(data);
       gon.user = data;
     })
-    .fail(function() {
-      alert('edit error');
-    });
+    .fail(() => alert('edit error'));
   });
 });
