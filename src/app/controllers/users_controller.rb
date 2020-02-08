@@ -11,14 +11,17 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    user = User.find(params[:id]) #ちょっとここいるかどうか検証必要
-    render json: user
+    #strong parameterでできないかな
+    user.update(name: params[:name], en_name: params[:en_name],
+                age: params[:age], profession: params[:profession],
+                content: params[:content], service: params[:service])
+    user.image.attach(params[:image]) if params[:image]
+    render json: user, methods: [:image_url]
   end
 
   private
     def user_params
-      params.require(:user).permit(:name, :en_name, :age, :profession, :content, :service, :image)
+      params.require(:user).permit(:name, :image, :en_name, :age, :profession, :content, :service)
     end
 
 end
