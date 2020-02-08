@@ -1,11 +1,17 @@
 const statusLabels = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
 var selectedWork = {};
+
 const zeroPadding = num => `0${num}`.substr(-2);
+const imageChange = (event) => {
+  var image = event.target.files[0]
+  var reader = new FileReader();
+  reader.onload = () => $('#work-image').attr('src', reader.result);
+  reader.readAsDataURL(image);
+};
 
 $(() => {
   const buildWorkHTML = data => {
     var skillText = '';
-
     if(data.skills){//skillの編集まだ実装してないから一時的
       for (var skill of data.skills) {
         skillText += '<span>' + skill.name + ' </span>';
@@ -15,14 +21,14 @@ $(() => {
     }
 
     var date = new Date(data.release_at);
-
-    $('#work-image').attr('src', data.image_url);
+    
+    $('.work-image-container').empty().append(`<img src="${data.image_url}" id="work-image" width="500" height="350">`)
     var html = $('.work-right-content').empty();
-    html.append('<h1>Title: <span>' + data.title + '</span></h1>');
-    html.append('<p>関連url: <span>' + data.url + '</span></p>');
-    html.append('<p>status: <span id="' + data.id +'">' + statusLabels[data.status] + '</span></p>');
-    html.append('<p>公開日: <span>' + date.getFullYear() + '/' +  zeroPadding(date.getMonth() + 1) + '/' + zeroPadding(date.getDate())+ '</span></p>');
-    html.append('<p>制作期間: <span>' + data.period + '</span></p>');
+    html.append(`<h1>Title: <span>${data.title}</span></h1>`);
+    html.append(`<p>関連url: <span>${data.url}</span></p>`);
+    html.append(`<p>status: <span id="${data.status}">${statusLabels[data.status]}</span></p>`);
+    html.append(`<p>公開日: <span>${date.getFullYear()}/${zeroPadding(date.getMonth() + 1)}/${zeroPadding(date.getDate())}</span></p>`);
+    html.append(`<p>制作期間: <span>${data.period}</span></p>`);
     if(data.skills){//skillの編集まだ実装してないから一時的
       html.append('<div class="skill-content"><p>Skill</p>' + skillText + '</div>');
     } else {
@@ -74,6 +80,7 @@ $(() => {
     $('.work-edit-save-btn').removeClass('none');
     var id = $('.selected-work').attr('value');
     var title = $('.work-right-content h1 span').text();
+    var image = $('#work-image').attr('src');
     var url = $('.work-right-content p:eq(0) span').text();
     var status = $('.work-right-content p:eq(1) span').attr('id');
     var tempDate = $('.work-right-content p:eq(2) span').text();
@@ -92,19 +99,24 @@ $(() => {
       period: period,
       content: content,
       reason: reason,
-      appeal: appeal
+      appeal: appeal,
+      image_url: image
     }
 
     var statusHtml = '<select class="work-status-input">';
     statusLabels.forEach((value, index) => {
-      if(status != index){
-        statusHtml += `<option value=${index}>${value}</option>`;
-      } else {
-        statusHtml += `<option selected value=${index}>${value}</option>`;
-      }
+      statusHtml += `<option ${Number(status)===index? "selected" : ""} value=${index}>${value}</option>`;
     });
     statusHtml += "</select>";
 
+    var image = $('#work-image').attr('src');
+    var inputElement = document.createElement("input");
+    inputElement.type = "file";
+    inputElement.accept = "image/jpg,image/jpeg,image/png";
+    inputElement.id = "edit-image";
+    inputElement.addEventListener("change", imageChange, false);
+
+    $('.work-image-container').empty().append(`<img src="${image}" id="work-image" width="500" height="350">`).append(inputElement);
     $('.work-right-content h1').empty().append('Title: <input class="work-text-input work-title-input" type="text" value="'+ title +'">');
     $('.work-right-content p:eq(0)').empty().append('関連url: <input class="work-text-input work-url-input" type="text" value="'+ url +'">');
     $('.work-right-content p:eq(1)').empty().append(`status: ${statusHtml}`);
@@ -129,6 +141,7 @@ $(() => {
 
     var id = $('.selected-work').attr('value');
     var title = $('.work-title-input').val();
+    var imageFile = document.getElementById("edit-image").files[0];
     var url = $('.work-url-input').val();
     var status = $('.work-status-input option:selected').attr('value');
     var releaseDate = new Date($('.work-release-year-input').val(),$('.work-release-month-input').val()-1,$('.work-release-date-input').val())
@@ -137,22 +150,25 @@ $(() => {
     var reason = $('.work-reason-input').val();
     var appeal = $('.work-appeal-input').val();
 
+    var formData = new FormData();
+    if(imageFile){
+      formData.append('image', imageFile);
+    }
+    formData.append('title', title);
+    formData.append('url', url);
+    formData.append('status', status);
+    formData.append('release_at', releaseDate);
+    formData.append('period', period);
+    formData.append('reason', reason);
+    formData.append('content', content);
+    formData.append('appeal', appeal);
+
     $.ajax({
-      dataType: 'json',
-      contentType: "application/json",
       url: `/works/${id}`,
+      contentType: false,
+      processData: false,
       type: "PUT",
-      data: JSON.stringify({
-        'title': title,
-        'url': url,
-        'image': 'image',
-        'status': status,
-        'release_at': releaseDate,
-        'period': period,
-        'reason': reason,
-        'content': content,
-        'appeal': appeal
-      })
+      data: formData
     })
     .done(data =>  buildWorkHTML(data))
     .fail(() => alert('edit error'));

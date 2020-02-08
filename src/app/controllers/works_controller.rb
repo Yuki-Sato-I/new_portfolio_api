@@ -13,8 +13,12 @@ class WorksController < ApplicationController
 
   def update
     work = Work.find(params[:id])
-    work.update(work_params)
-    render json: work
+    work.update(title: params[:title], url: params[:url],
+                status: params[:status], release_at: params[:release_at],
+                period: params[:period], reason: params[:reason],
+                content: params[:content], appeal: params[:appeal])
+    work.image.attach(params[:image]) if params[:image]
+    render json: work, methods: [:image_url]
   end
 
   private
