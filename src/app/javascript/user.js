@@ -1,10 +1,17 @@
+const imageChange = (event) => {
+  var image = event.target.files[0]
+  var reader = new FileReader();
+  reader.onload = () => $('#user-image').attr('src', reader.result);
+  reader.readAsDataURL(image);
+};
+
 $(() => {
   const reBuild = data => {
-    var profileHtml = `<h1>${data.name}/${data.en_name}</h1><p>年齢: ${data.age}歳</p><p>職業: ${data.profession}</p>`;
-    var contentHtml = `<p>${data.content}</p>`;
-    var serviceHtml = `<p>${data.service}</p>`;
+    var profileHtml = `<h1>${data.name}/${data.en_name}</h1><p class="user-age">年齢: ${data.age}歳</p><p class="user-profession">職業: ${data.profession}</p>`;
+    var contentHtml = `${data.content}`;
+    var serviceHtml = `${data.service}`;
 
-    $('#user-image').attr('src', data.image);
+    $('.user-image-container').empty().append(`<img src="${data.image_url}" id="user-image" width="200" height="200">`)
     $('.profile').empty().append(profileHtml);
     $('.user-content p').empty().append(contentHtml);
     $('.user-service p').empty().append(serviceHtml);
@@ -12,6 +19,13 @@ $(() => {
 
   $('.user-edit-btn').click(function(){
     $(this).addClass('none');
+    var image = $('#user-image').attr('src');
+    var inputElement = document.createElement("input");
+    inputElement.type = "file";
+    inputElement.accept = "image/jpg,image/jpeg,image/png";
+    inputElement.id = "user-edit-image";
+    inputElement.addEventListener("change", imageChange, false);
+    $('.user-image-container').empty().append(`<img src="${image}" id="user-image" width="200" height="200">`).append(inputElement);
     $('.user-edit-cancel-btn').removeClass('none');
     $('.user-edit-save-btn').removeClass('none');
     $('.user-age').empty().append('年齢: <input class="user-number-input user-age-input" type="number" value="'+ gon.user.age +'">歳');
@@ -35,25 +49,29 @@ $(() => {
 
     var name = $('.user-name-input').val();
     var enName = $('.user-enname-input').val();
+    var imageFile = document.getElementById("user-edit-image").files[0];
     var age = $('.user-age-input').val();
     var profession = $('.user-profession-input').val();
     var content = $('.user-content-input').val();
     var service = $('.user-service-input').val();
 
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('en_name', enName);
+    if(imageFile){
+      formData.append('image', imageFile);
+    }
+    formData.append('age', age);
+    formData.append('profession', profession);
+    formData.append('content', content);
+    formData.append('service', service);
+
     $.ajax({
-      dataType: 'json',
-      contentType: "application/json",
       url: '/users/1',
+      contentType: false,
+      processData: false,
       type: "PUT",
-      data: JSON.stringify({
-        'name': name,
-        'en_name': enName,
-        'image': 'image',
-        'age': age,
-        'profession': profession,
-        'content': content,
-        'service': service
-      })
+      data: formData,
     })
     .done(data => {
       reBuild(data);

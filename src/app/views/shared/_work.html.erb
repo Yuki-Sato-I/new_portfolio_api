@@ -15,17 +15,13 @@
       <button class="none work-edit-save-btn">save</button>
       <span class="work-edit-btn"><i class="far fa-edit fa-2x"></i></span>
     </div>
-    <span class="inline-block">
-      <% if @work.image.attached? %>
-        <%= image_tag @work.image, size: '500x350', id: 'work-image' %>
-      <% else %>
-        <%= image_tag '', size: '500x350', id: 'work-image' %>
-      <% end %>
+    <span class="inline-block work-image-container">
+      <%= image_tag @work.image.attached? ? @work.image : "", size: '500x350', id: 'work-image' %>
     </span>
     <div class="work-right-content inline-block">
       <h1>Title: <span><%= @work.title %></span></h1>
       <p>関連url: <span><%= @work.url %></span></p>
-      <p>status: <span id=<%= @work.id %>><%= status[@work.status] %></span></p>
+      <p>status: <span id=<%= @work.status %>><%= status[@work.status] %></span></p>
       <p>公開日: <span><%= @work.release_at.strftime("%Y/%m/%d") %></span></p>
       <p>制作期間: <span><%= @work.period %></span></p>
       <div class="skill-content">
