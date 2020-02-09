@@ -304,3 +304,58 @@ body {
     cursor: pointer;
   }
 }
+
+.history-edit-btns {
+	text-align: right;
+	svg.fa-edit {
+		position: absolute;
+			right: 20px;
+			top: 20px;
+		cursor: pointer;
+	}
+
+	button {
+		font-weight: bold;
+		height: 40px;
+		width: 120px;
+		font-size: 20px;
+		margin-top: 4px;
+		margin-right: 4px;
+		text-align: center;
+		border-style: none;
+		border: solid 1px #464E58;
+	}
+
+	.history-edit-save-btn{
+		background-color: #ff6a5c;
+		color: white;
+	}
+
+	.history-edit-cancel-btn{
+		color: #464E58;
+	}
+}
+
+.history-number-input {
+	border: solid 1px lightgray;
+	width: 55px;
+}
+
+.history-text-input {
+	border: solid 1px lightgray;
+}
+
+.history-title-input {
+	height: 55px;
+	line-height: 55px;
+	font-size: 2rem;
+	background-color: white;
+}
+
+
+.history-textarea-input {
+	width: calc(100% - 20px);
+	margin: 0 auto;
+	font-size: 16px;
+	border: solid 1px lightgray;
+}

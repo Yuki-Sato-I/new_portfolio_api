@@ -27,17 +27,24 @@
 	<div class="main">
 		<ul class="cbp_tmtimeline">
       <% @histories.each do |history| %>
-        <li>
+        <li value=<%= history.id %>>
+        <% if history.start_at && history.end_at %>
+          <p class="none history-startDate"><%= history.start_at.strftime('%Y') %>-<%= history.start_at.strftime('%m') %>-<%= history.start_at.strftime('%d') %></p>
+          <p class="none history-endDate"><%= history.end_at.strftime('%Y') %>-<%= history.end_at.strftime('%m') %>-<%= history.end_at.strftime('%d') %></p>
           <time class="cbp_tmtime"><span><%= history.start_at.strftime('%Y') %></span> <span><%= history.start_at.strftime('%m/%d') %></span></time>
+        <% end %>
           <div class="cbp_tmicon cbp_tmicon-phone"></div>
           <div class="cbp_tmlabel">
-            <h2><%= history.title %></h2>
-            <% if history.image.attached? %>
-              <p><%= image_tag history.image, size: '400x250', id: 'work-image' %></p>
-            <% else %>
-              <p><%= image_tag '', size: '400x250', id: 'work-image' %></p>
-            <% end %>
-            <p><%= history.content %></p>
+            <div class="history-edit-btns">
+              <button class="none history-edit-cancel-btn">cansel</button>
+              <button class="none history-edit-save-btn">save</button>
+              <span class="history-edit-btn"><i class="far fa-edit fa-2x"></i></span>
+            </div>
+            <h2 class="history-title"><%= history.title %></h2>
+            <p class="history-image-container">
+              <%= image_tag history.image.attached? ? history.image : "", size: '400x250', id: 'history-image', class: 'history-image' %>
+            </p>
+            <p class="history-content"><%= history.content %></p>
           </div>
         </li>
       <% end %>

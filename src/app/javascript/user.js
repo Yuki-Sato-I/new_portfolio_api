@@ -7,7 +7,6 @@ const imageChange = (event) => {
 
 $(() => {
   const reBuild = data => {
-    console.log(data);
     var profileHtml = `<h1>${data.name}/${data.en_name}</h1><p class="user-age">年齢: ${data.age}歳</p><p class="user-profession">職業: ${data.profession}</p>`;
     var contentHtml = `${data.content}`;
     var serviceHtml = `${data.service}`;
