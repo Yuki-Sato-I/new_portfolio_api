@@ -7,7 +7,11 @@ class HistoriesController < ApplicationController
   end
 
   def update
-    
+    history = History.find(params[:id])
+    history.update(title: params[:title], content: params[:content],
+                   start_at: params[:start_at], end_at: params[:end_at])
+    history.image.attach(params[:image]) if params[:image]
+    render json: history, methods: [:image_url]
   end
 
   private

@@ -1,9 +1,17 @@
-$(function(){
-  function buildWorkHTML(data){
+const statusLabels = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
+var selectedWork = {};
 
-    const zeroPadding = (num) => `0${num}`.substr(-2);
+const zeroPadding = num => `0${num}`.substr(-2);
+const imageChange = (event) => {
+  var image = event.target.files[0]
+  var reader = new FileReader();
+  reader.onload = () => $('#work-image').attr('src', reader.result);
+  reader.readAsDataURL(image);
+};
+
+$(() => {
+  const buildWorkHTML = data => {
     var skillText = '';
-
     if(data.skills){//skillの編集まだ実装してないから一時的
       for (var skill of data.skills) {
         skillText += '<span>' + skill.name + ' </span>';
@@ -12,18 +20,15 @@ $(function(){
       skillText = $('.skill-content').html();
     }
 
-    console.log(skillText);
-
     var date = new Date(data.release_at);
-    var status = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
-
-    $('#work-image').attr('src', data.image_url);
+    
+    $('.work-image-container').empty().append(`<img src="${data.image_url}" id="work-image" width="500" height="350">`)
     var html = $('.work-right-content').empty();
-    html.append('<h1>Title: <span>' + data.title + '</span></h1>');
-    html.append('<p>関連url: <span>' + data.url + '</span></p>');
-    html.append('<p>status: <span id="' + data.id +'">' + status[data.status] + '</span></p>');
-    html.append('<p>公開日: <span>' + date.getFullYear() + '/' +  zeroPadding(date.getMonth() + 1) + '/' + zeroPadding(date.getDate())+ '</span></p>');
-    html.append('<p>制作期間: <span>' + data.period + '</span></p>');
+    html.append(`<h1>Title: <span>${data.title}</span></h1>`);
+    html.append(`<p>関連url: <span>${data.url}</span></p>`);
+    html.append(`<p>status: <span id="${data.status}">${statusLabels[data.status]}</span></p>`);
+    html.append(`<p>公開日: <span>${date.getFullYear()}/${zeroPadding(date.getMonth() + 1)}/${zeroPadding(date.getDate())}</span></p>`);
+    html.append(`<p>制作期間: <span>${data.period}</span></p>`);
     if(data.skills){//skillの編集まだ実装してないから一時的
       html.append('<div class="skill-content"><p>Skill</p>' + skillText + '</div>');
     } else {
@@ -35,8 +40,7 @@ $(function(){
   }
 
   $('.work-scroll ul li').click(function() {
-
-    var id = $(this).val();
+    const id = $(this).val();
     $('.selected-work').removeClass('selected-work');
     $(this).addClass('selected-work');
     $('.work-edit-btn').removeClass('none');
@@ -47,13 +51,8 @@ $(function(){
       type:'GET',
       url: '/works/' + id
     })
-    .done(function(data){
-      console.log(data)
-      buildWorkHTML(data);
-    })
-    .fail(function(){
-      alert('検索に失敗しました');
-    });
+    .done(data => buildWorkHTML(data))
+    .fail(() => alert('検索に失敗しました'));
   });
 
   $('.work-add-btn').on('click', function(){
@@ -66,7 +65,6 @@ $(function(){
   });
   
   $('.work-add-container').on('ajax:success', 'form', function(e) {
-    console.log(e.detail[0])
     $('#work_title').val('');
     $('#work_content').val('');
     $('#work_url').val('');
@@ -76,14 +74,13 @@ $(function(){
     $('.work-add-btn').removeClass('none');
   });
 
-  var selectedWork = "";
-
-  $('.work-edit-btn').on('click', function(){
+  $('.work-edit-btn').click(function(){
     $(this).addClass('none');
     $('.work-edit-cancel-btn').removeClass('none');
     $('.work-edit-save-btn').removeClass('none');
     var id = $('.selected-work').attr('value');
     var title = $('.work-right-content h1 span').text();
+    var image = $('#work-image').attr('src');
     var url = $('.work-right-content p:eq(0) span').text();
     var status = $('.work-right-content p:eq(1) span').attr('id');
     var tempDate = $('.work-right-content p:eq(2) span').text();
@@ -102,22 +99,24 @@ $(function(){
       period: period,
       content: content,
       reason: reason,
-      appeal: appeal
+      appeal: appeal,
+      image_url: image
     }
-    console.log(selectedWork);
 
-   
-    var statusArray = ['ポートフォリオに公開しない', 'ポートフォリオに公開/ネットに公開', 'ポートフォリオに公開/ネットに未公開', '注目作品(トップページに表示)'];
     var statusHtml = '<select class="work-status-input">';
-    statusArray.forEach(function(value, index){
-      if(status != index){
-        statusHtml += `<option value=${index}>${value}</option>`;
-      } else {
-        statusHtml += `<option selected value=${index}>${value}</option>`;
-      }
+    statusLabels.forEach((value, index) => {
+      statusHtml += `<option ${Number(status)===index? "selected" : ""} value=${index}>${value}</option>`;
     });
     statusHtml += "</select>";
 
+    var image = $('#work-image').attr('src');
+    var inputElement = document.createElement("input");
+    inputElement.type = "file";
+    inputElement.accept = "image/jpg,image/jpeg,image/png";
+    inputElement.id = "edit-image";
+    inputElement.addEventListener("change", imageChange, false);
+
+    $('.work-image-container').empty().append(`<img src="${image}" id="work-image" width="500" height="350">`).append(inputElement);
     $('.work-right-content h1').empty().append('Title: <input class="work-text-input work-title-input" type="text" value="'+ title +'">');
     $('.work-right-content p:eq(0)').empty().append('関連url: <input class="work-text-input work-url-input" type="text" value="'+ url +'">');
     $('.work-right-content p:eq(1)').empty().append(`status: ${statusHtml}`);
@@ -133,7 +132,6 @@ $(function(){
     $('.work-edit-save-btn').addClass('none');
     $('.work-edit-btn').removeClass('none');
     buildWorkHTML(selectedWork);
-    console.log(selectedWork);
   });
 
   $('.work-edit-save-btn').on('click', function(){
@@ -143,6 +141,7 @@ $(function(){
 
     var id = $('.selected-work').attr('value');
     var title = $('.work-title-input').val();
+    var imageFile = document.getElementById("edit-image").files[0];
     var url = $('.work-url-input').val();
     var status = $('.work-status-input option:selected').attr('value');
     var releaseDate = new Date($('.work-release-year-input').val(),$('.work-release-month-input').val()-1,$('.work-release-date-input').val())
@@ -151,28 +150,27 @@ $(function(){
     var reason = $('.work-reason-input').val();
     var appeal = $('.work-appeal-input').val();
 
-    $.ajax({      
-      dataType: 'json',
-      contentType: "application/json",
+    var formData = new FormData();
+    if(imageFile){
+      formData.append('image', imageFile);
+    }
+    formData.append('title', title);
+    formData.append('url', url);
+    formData.append('status', status);
+    formData.append('release_at', releaseDate);
+    formData.append('period', period);
+    formData.append('reason', reason);
+    formData.append('content', content);
+    formData.append('appeal', appeal);
+
+    $.ajax({
       url: `/works/${id}`,
+      contentType: false,
+      processData: false,
       type: "PUT",
-      data: JSON.stringify({
-      'title': title,
-      'url': url,
-      'image': 'image',
-      'status': status,
-      'release_at': releaseDate,
-      'period': period,
-      'reason': reason,
-      'content': content,
-      'appeal': appeal
-      })
+      data: formData
     })
-    .done(function(data) {
-      buildWorkHTML(data);
-    })
-    .fail(function() {
-      alert('edit error');
-    });
+    .done(data =>  buildWorkHTML(data))
+    .fail(() => alert('edit error'));
   });
 });
