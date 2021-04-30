@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # CORS設定gem
 gem 'rack-cors'
 
-gem 'gon', '~> 6.1.0'
+gem 'gon', '~> 6.4.0'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 # Use Redis adapter to run Action Cable in production
